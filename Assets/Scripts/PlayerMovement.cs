@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Rigidbody2D rb;
-    public Animator anim;
-
+    private Rigidbody2D rb;
+    private Animator anim;
     private Vector2 movement = new Vector2();
     private readonly Vector3 LEFT = new Vector3(-1,1,1);
     private readonly Vector3 RIGHT = new Vector3(1,1,1);
 
+    private void Start() 
+    {
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
         movement = this.getLinearMovement();

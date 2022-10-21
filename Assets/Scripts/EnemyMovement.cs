@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,17 +5,24 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public Animator anim;
+    public float chaseDistance;
+    public float movimentDelay;
+    public float stopDelay;
 
+    private Animator anim;
     private NavMeshAgent agent;
     private GameObject target;
     private Vector3 movement = new Vector3();
+    private Vector3 initalPosition = new Vector3();
     private float delay = 0;
     private bool isBloqued = false;   
     private bool movingToX;
+    private bool chasing;
 
     private void Start() 
     {
+        initalPosition = transform.position;
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         agent.updateRotation = false;
@@ -40,16 +45,25 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        agent.SetDestination(target.transform.position);
-
         delay += Time.deltaTime;
-        if(delay < 0.1){
+        if(delay < stopDelay){
             return;
         }
 
+        agent.SetDestination(target.transform.position);
+
+        var distanceFromTarget = (transform.position - target.transform.position).magnitude;
+        chasing = distanceFromTarget < chaseDistance;
+
+        if(!chasing){
+            agent.isStopped = true;
+            return;
+        }
+
+        agent.isStopped = false;
         var nextPosition = transform.position + movement;
         transform.position = Vector3.Lerp(transform.position, nextPosition, Time.deltaTime);  
-        if(delay < 0.4){
+        if(delay < movimentDelay){
             return;
         }
         
