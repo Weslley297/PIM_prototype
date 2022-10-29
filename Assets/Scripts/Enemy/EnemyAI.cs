@@ -3,32 +3,59 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public float HP;
     public float ActivationDistance;
     public float inactivationDistance;
 
     private NavMeshAgent agent;
+    private Animator animator;
+    private Collider2D collider;
+    private SpriteRenderer renderer;
     private GameObject target;
     private Vector3 targetPosition;
-    private Vector3 targetOffset;
+    private Vector3 offset;
     private Vector3 initialPosition = new Vector3();
     private EnemyMovement enemyMovement;
     private EnemyAttack enemyAttack;
+    private EnemyAudio enemyAudio;
+    private bool dead;
     
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-        targetOffset = target.GetComponent<Collider2D>().offset;
+        offset = target.GetComponent<Collider2D>().offset;
+        
+        animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
+        renderer = GetComponent<SpriteRenderer>();
         enemyMovement = GetComponent<EnemyMovement>();
         enemyAttack = GetComponent<EnemyAttack>();
+        enemyAudio = GetComponent<EnemyAudio>();
         agent = GetComponent<NavMeshAgent>();
 
         initialPosition = transform.position;
     }
 
+     void OnCollisionEnter2D(Collision2D  collision) 
+    {
+        if(collision.collider.tag == "Player"){
+            TakeDamage(40);
+        }
+
+        if(collision.collider.tag == "Bullet"){
+            TakeDamage(25);
+        }
+    }
+
     void Update()
     {
-        targetPosition = target.transform.position + targetOffset;
+        if(dead){
+            StopMoving();
+            return;
+        }
+
+        targetPosition = target.transform.position + offset;
 
         var targetDistance = GetDistanceFromTarget();
         if(targetDistance < ActivationDistance){            
@@ -50,6 +77,7 @@ public class EnemyAI : MonoBehaviour
 
     private void BackToInit(){
         enemyMovement.SetTargetPosition(initialPosition);
+        enemyAudio.PlayWalkSound();
         enemyMovement.Move();
     }
 
@@ -57,6 +85,7 @@ public class EnemyAI : MonoBehaviour
         enemyMovement.SetTargetPosition(targetPosition);
         
         if(!enemyAttack.CanAttack(targetPosition)){
+            enemyAudio.PlayWalkSound();
             enemyMovement.Move();
             return;
         }
@@ -64,9 +93,30 @@ public class EnemyAI : MonoBehaviour
         var direction = enemyAttack.SetLinearShootDirection(targetPosition);
         enemyMovement.TurnToTarget(direction);
         enemyAttack.Attack();
+        enemyAudio.PlayAttackSound();
     }
 
     private void StopMoving(){
         enemyMovement.Stop();
+    }
+
+    private void TakeDamage(float damage){
+        Debug.Log("damage" + damage);
+        HP -= damage;
+
+        if(HP > 0){
+            enemyAudio.PlayHitSound();
+            enemyAttack.ReloadAttack();
+            return;
+        }
+        
+        dead = true;
+        enemyAudio.PlayDieSound();
+        animator.SetBool("Dead", dead);
+        StopMoving();
+
+        enabled = false;
+        renderer.sortingOrder = 0;
+        collider.enabled = false;
     }
 }

@@ -4,7 +4,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public bool shooter;
     public float shootWidth;
-    public float attackReload;
+    public float attackReloadTime;
     public LayerMask layerMask;
     
     public GameObject bulletPrefab;
@@ -21,14 +21,11 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-    }
-
-    private void FixedUpdate() {
-       
+        enabled = false;
     }
 
     public bool CanAttack(Vector3 targetPosition){
-        if(timer < attackReload){
+        if(timer < attackReloadTime){
             timer += Time.deltaTime;
             return false;
         }
@@ -93,5 +90,9 @@ public class EnemyAttack : MonoBehaviour
     private Vector2 GetShootPosition(){
         var size = linearShootDirection * sprite.bounds.size;
         return new Vector2(transform.position.x + size.x, transform.position.y + size.y);
+    }
+
+    public void ReloadAttack(){
+        timer = 0;
     }
 }
