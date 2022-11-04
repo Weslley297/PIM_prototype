@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public bool shooter;
+    public GameObject bulletPrefab;
     public float shootWidth;
     public float attackReloadTime;
-    public LayerMask layerMask;
-    
-    public GameObject bulletPrefab;
+    public bool shooter;
 
     private float timer = 0;
     private Vector2 linearShootDirection;
@@ -83,7 +81,7 @@ public class EnemyAttack : MonoBehaviour
         var bulletPosition = new Vector3(shootPosition.x, shootPosition.y, 0);
 
         var bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
-        var bulletMoviment = bullet.GetComponent<BulletMoviment>();
+        var bulletMoviment = bullet.GetComponent<BulletScript>();
         bulletMoviment.SetDirection(linearShootDirection);
     }
 

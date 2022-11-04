@@ -37,17 +37,6 @@ public class EnemyAI : MonoBehaviour
         initialPosition = transform.position;
     }
 
-     void OnCollisionEnter2D(Collision2D  collision) 
-    {
-        if(collision.collider.tag == "Player"){
-            TakeDamage(40);
-        }
-
-        if(collision.collider.tag == "Bullet"){
-            TakeDamage(25);
-        }
-    }
-
     void Update()
     {
         if(dead){
@@ -100,11 +89,10 @@ public class EnemyAI : MonoBehaviour
         enemyMovement.Stop();
     }
 
-    private void TakeDamage(float damage){
-        Debug.Log("damage" + damage);
+    public void TakeDamage(float damage, Vector2 direction){
         HP -= damage;
-
         if(HP > 0){
+            enemyMovement.AddImpulse(direction);
             enemyAudio.PlayHitSound();
             enemyAttack.ReloadAttack();
             return;

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    private Vector2 movement = new Vector2();
+    private Vector2 movement = new Vector2(0, 1);
     
     private readonly Vector3 LEFT = new Vector3(-1,1,1);
     private readonly Vector3 RIGHT = new Vector3(1,1,1);
@@ -22,19 +22,29 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) 
     {
-        if(collision.collider.tag == "Enemy" || collision.collider.tag == "Bullet"){
-            ContactImpulse(collision.collider.transform.position, collision.contacts[0].point);
-            timer = 0;
+        if(collision.collider.tag == "Enemy"){
+            ContactImpulse(collision);
         }
     }
 
-    private void ContactImpulse(Vector2 colliderPosition, Vector2 contactPoint){
+
+
+    public void ContactImpulse(Collision2D collision){
+        Vector2 contactPoint = collision.contacts[0].point;
+        Vector2 colliderPosition = collision.collider.transform.position;
+
         var contactForce = (contactPoint - colliderPosition).normalized;
         var contactDirection = GetContactiDirection(contactForce);
-    
-        rb.AddForce(contactDirection * damageImpulse, ForceMode2D.Impulse);
+        
+        AddImpulse(contactDirection);
     }
 
+    public void AddImpulse(Vector2 direction){
+        rb.AddForce(direction * damageImpulse, ForceMode2D.Impulse);
+        timer = -0.3f;
+    }
+
+   
     private Vector2 GetContactiDirection(Vector2 contact){
         var isHorizontal = Math.Abs(contact.x) > Math.Abs(contact.y);
         if(isHorizontal)
@@ -45,20 +55,17 @@ public class PlayerMovement : MonoBehaviour
         return new Vector2(0, contact.y < 0 ? -1 : 1);
     }
 
-
     void Update() {
+        if(timer < 0){
+            timer += Time.deltaTime;
+            return;
+        }
+
         movement = this.getLinearMovement();
 
         setStateParameters(movement);      
 
         transform.localScale = getTranslationLeftOrRight();
-    }
-
-    void FixedUpdate() {
-        if(timer < 0.3){
-            timer += Time.deltaTime;
-            return;
-        }
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
     }
@@ -90,6 +97,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 getTranslationLeftOrRight(){
         return movement.x == 0 ? transform.localScale
             : movement.x > 0 ? RIGHT : LEFT;
+    }
+
+    public void StopMoviment(float delay){
+        timer = -delay;
     }
     
 }

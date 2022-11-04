@@ -34,21 +34,11 @@ public class EnemyMovement : MonoBehaviour
         if(collision.rigidbody.bodyType == RigidbodyType2D.Static){
             notBloqued = false;
         }
-
-        if(collision.collider.tag == "Bullet"){
-            ContactImpulse(collision.contacts[0]);
-            timer = 0;
-        }
     }
 
-    private void ContactImpulse(ContactPoint2D contact){
-        var contactForce = (rb.position - contact.point).normalized;
-
-        if(linearMoviment){
-            contactForce = GetContactiDirection(contactForce);
-        }
-
-        rb.AddForce(contactForce * damageImpulse, ForceMode2D.Impulse);
+    public void AddImpulse(Vector2 direction){
+        rb.AddForce(direction * damageImpulse, ForceMode2D.Impulse);
+        timer = -1;
     }
 
     private Vector2 GetContactiDirection(Vector2 contact){
