@@ -23,7 +23,7 @@ public class EnemyAudio : MonoBehaviour
         }
 
         audioSource.clip = walkSound;
-        audioSource.volume = 0.3f;
+        audioSource.volume = 1f;
         audioSource.loop = true;
         
         audioSource.Play();

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     
     private readonly Vector3 LEFT = new Vector3(-1,1,1);
     private readonly Vector3 RIGHT = new Vector3(1,1,1);
+    private bool updateDisabled;
     private float timer;
 
     private void Start() 
@@ -26,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
             ContactImpulse(collision);
         }
     }
-
 
 
     public void ContactImpulse(Collision2D collision){
@@ -56,12 +56,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if(timer < 0){
-            timer += Time.deltaTime;
+        if(updateDisabled){
             return;
         }
 
         movement = this.getLinearMovement();
+    }
+
+    private void FixedUpdate() {
+        if(timer < 0){
+            timer += Time.deltaTime;
+            return;
+        }
 
         setStateParameters(movement);      
 
@@ -100,7 +106,23 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void StopMoviment(float delay){
+        movement = new Vector2(0, 0);
         timer = -delay;
     }
+
+    public void SetMoviment(Vector2 mov){
+        movement = mov;
+    }
+
+    public void SetMoveSpeed(float speed){
+        moveSpeed = speed;
+    }
+
+    public void InputDisabled(){
+        updateDisabled = true;
+    }
     
+    public void InputEnabled(){
+        updateDisabled = false;
+    }
 }

@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if(dead){
-            StopMoving();
+            Destroy(this);
             return;
         }
 
