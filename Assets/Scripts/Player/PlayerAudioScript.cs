@@ -1,6 +1,7 @@
+
 using UnityEngine;
 
-public class EnemyAudio : MonoBehaviour
+public class PlayerAudioScript : MonoBehaviour
 {
     public AudioClip walkSound;
     public AudioClip attackSound;
@@ -14,18 +15,16 @@ public class EnemyAudio : MonoBehaviour
     }
 
     public void PlayWalkSound(){
-        if(audioSource.isPlaying){
-            return;
-        }
-
-        if(audioSource.clip == walkSound){
+        if(audioSource.isPlaying && audioSource.clip == walkSound){
             return;
         }
 
         audioSource.clip = walkSound;
-        audioSource.volume = 1f;
         audioSource.loop = true;
+        audioSource.priority = 50;
+        audioSource.volume = 0.9f;
         
+        audioSource.pitch = getPitch(1.4f, 1.8f);
         audioSource.Play();
     }
 
@@ -33,9 +32,9 @@ public class EnemyAudio : MonoBehaviour
         StopSound();
 
         audioSource.clip = attackSound;
-        audioSource.volume = 1f;
         audioSource.loop = false;
-
+        audioSource.volume = 0.7f;
+        audioSource.pitch = getPitch(1f, 1.4f);
         audioSource.Play();
     }
 
@@ -43,9 +42,9 @@ public class EnemyAudio : MonoBehaviour
         StopSound();
 
         audioSource.clip = hitSound;
-        audioSource.volume = 1f;
         audioSource.loop = false;
-
+        audioSource.volume = 0.6f;
+        audioSource.pitch = getPitch(0.8f, 1.4f);
         audioSource.Play();
     }
 
@@ -53,9 +52,9 @@ public class EnemyAudio : MonoBehaviour
         StopSound();
 
         audioSource.clip = dieSound;
-        audioSource.volume = 1f;
         audioSource.loop = false;
-
+        audioSource.volume = 0.6f;
+        audioSource.pitch = getPitch(0.8f, 1.4f);
         audioSource.Play();
     }
 
@@ -66,5 +65,20 @@ public class EnemyAudio : MonoBehaviour
 
         audioSource.Stop();
     }
-}
 
+    public void StopWalkSound(){
+        if(audioSource.clip != walkSound){
+            return;
+        }
+
+        if(!audioSource.isPlaying){
+           return;
+        }
+
+        audioSource.Stop();
+    }
+
+    private float getPitch(float rangeInit, float rangeEnd ){
+       return Random.Range(rangeInit, rangeEnd); 
+    }
+}

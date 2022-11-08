@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttackScript : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float shootWidth;
@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
     public bool shooter;
 
     private float timer = 0;
-    private Vector2 linearShootDirection;
+    private Vector2 attackDirection;
     private SpriteRenderer sprite;
 
     private readonly Vector2 LEFT = new Vector2(-1, 0);
@@ -32,16 +32,13 @@ public class EnemyAttack : MonoBehaviour
             return false;
         }
 
-        
-        var direction = SetLinearShootDirection(targetPosition);
-        var position = GetShootPosition();
+        SetAttackDirection(targetPosition);
+        RaycastHit2D hit = Physics2D.Raycast(
+            GetShootPosition(), 
+            getAttackDirection()
+        );
 
-        RaycastHit2D hit = Physics2D.Raycast(position, direction);
-        if(hit.collider == null || !hit.collider.tag.Equals("Player")){
-            return false;
-        } 
-     
-        return true;
+        return hit.collider != null && hit.collider.tag.Equals("Player");
     }
 
     private bool CanLinearShoot(Vector3 targetPosition){
@@ -52,16 +49,18 @@ public class EnemyAttack : MonoBehaviour
             || (targetDistance.y < 0 && CheckWith(targetDistance.x));
     }
 
-    public Vector2 SetLinearShootDirection(Vector3 targetPosition){
+    public void SetAttackDirection(Vector3 targetPosition){
         var targetDistance = transform.position - targetPosition;
 
-        linearShootDirection = (targetDistance.x > 0 && CheckWith(targetDistance.y)) ? LEFT
+        attackDirection = (targetDistance.x > 0 && CheckWith(targetDistance.y)) ? LEFT
             : (targetDistance.x < 0 && CheckWith(targetDistance.y)) ? RIGHT
             : (targetDistance.y > 0 && CheckWith(targetDistance.x)) ? DOWN
             : (targetDistance.y < 0 && CheckWith(targetDistance.x)) ? UP
             : new Vector2();
+    }
 
-        return linearShootDirection;
+    public Vector2 getAttackDirection(){
+        return attackDirection;
     }
 
     private bool CheckWith(float side){
@@ -82,11 +81,11 @@ public class EnemyAttack : MonoBehaviour
 
         var bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
         var bulletMoviment = bullet.GetComponent<BulletScript>();
-        bulletMoviment.SetDirection(linearShootDirection);
+        bulletMoviment.SetDirection(attackDirection);
     }
 
     private Vector2 GetShootPosition(){
-        var size = linearShootDirection * sprite.bounds.size;
+        var size = attackDirection * sprite.bounds.size;
         return new Vector2(transform.position.x + size.x, transform.position.y + size.y);
     }
 

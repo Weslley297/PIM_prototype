@@ -29,7 +29,7 @@ public class SwordScript : MonoBehaviour
     {
         if(otherCollider.tag == "Enemy"){
             otherCollider.gameObject
-                .GetComponent<EnemyAI>()
+                .GetComponent<EnemyScript>()
                 .TakeDamage(damage, direction);
 
             if(collider != null){

@@ -5,20 +5,19 @@ public class StairwayScript : MonoBehaviour
 {
     public GameObject exit;
     public Vector2 direction;
-    public Sprite topSprite, bottomSprite, leftSprite, rightSprite;
     public float topCameraLimit, bottomCameraLimit, rightCameraLimit, leftCameraLimit;
 
     private GameObject player;
-    private PlayerMovement playerMovement;
+    private PlayerMovementScript playerMovement;
+    private PlayerInputScript playerInput;
     private StairwayScript exitScript;
-     private MainCameraScript cameraScript;
+     private GameObject mainCamera;
     private bool active;
     private float timer;
 
     void Start()
     {
-        cameraScript = GameObject.FindGameObjectWithTag("MainCamera")
-            .GetComponent<MainCameraScript>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
         exitScript = exit.GetComponent<StairwayScript>();
 
@@ -26,17 +25,15 @@ public class StairwayScript : MonoBehaviour
     }
 
     private Sprite getSprite(){
-        return direction.y > 0 ? topSprite
-            : direction.y < 0 ? bottomSprite
-            : direction.x > 0 ? rightSprite
-            : direction.x < 0 ? leftSprite: null;
+        return null;
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
        if(collider.tag == "Player"){  
             player = collider.gameObject;
-            playerMovement = player.GetComponent<PlayerMovement>();
-            
+            playerMovement = player.GetComponent<PlayerMovementScript>();
+            playerInput = player.GetComponent<PlayerInputScript>();
+
             timer = -1.5f;
             active = true;
         }
@@ -62,15 +59,15 @@ public class StairwayScript : MonoBehaviour
         }
 
         playerMovement.SetMoveSpeed(6);
-        playerMovement.InputEnabled();
+        playerInput.InputEnable();
         exit.SetActive(true);
         active = false;
     }
 
     private void PlayerStairsEnter(){
-        playerMovement.InputDisabled();
-        playerMovement.SetMoviment(direction);
-        playerMovement.SetMoveSpeed(1);
+        playerInput.InputDisable();
+        playerMovement.SetMovement(direction);
+        playerMovement.SetMoveSpeed(1f);
     }
 
     private void PlayerStairsExit(){
@@ -81,15 +78,17 @@ public class StairwayScript : MonoBehaviour
         exit.SetActive(false);
         setLimitsFromCamera();
         player.transform.position = getPlayerPosition();
-        playerMovement.SetMoviment(-exitScript.direction); 
+        playerMovement.SetMovement(-exitScript.direction); 
     } 
 
     private void setLimitsFromCamera(){
-        cameraScript.setCameraLimits(
-            exitScript.topCameraLimit, 
-            exitScript.bottomCameraLimit, 
-            exitScript.leftCameraLimit, 
-            exitScript.rightCameraLimit
+        mainCamera.GetComponent<CameraAudioScript>().PlayBattleSound();
+        mainCamera.GetComponent<CameraScript>()
+            .setCameraLimits(
+                exitScript.topCameraLimit, 
+                exitScript.bottomCameraLimit, 
+                exitScript.leftCameraLimit, 
+                exitScript.rightCameraLimit
         );
     }
 

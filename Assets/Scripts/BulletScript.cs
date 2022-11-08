@@ -18,14 +18,14 @@ public class BulletScript : MonoBehaviour
         
         if(collider.tag == "Enemy"){
             collider.gameObject
-                .GetComponent<EnemyAI>()
+                .GetComponent<EnemyScript>()
                 .TakeDamage(damage, direction);
         }
 
         if(collider.tag == "Player"){            
             collider.gameObject
-                .GetComponent<PlayerMovement>()
-                .AddImpulse(direction);
+                .GetComponent<PlayerScript>()
+                .TakeDamage(damage, direction);
         }
     }
     

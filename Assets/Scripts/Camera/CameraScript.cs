@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainCameraScript : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
     public float topCameraLimit, bottomCameraLimit, rightCameraLimit, leftCameraLimit;
     

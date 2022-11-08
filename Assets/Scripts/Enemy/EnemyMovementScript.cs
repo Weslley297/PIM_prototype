@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovementScript : MonoBehaviour
 {
     public float moveSpeed;
     public float movimentDelay;
@@ -29,35 +29,6 @@ public class EnemyMovement : MonoBehaviour
         agent.updatePosition = !linearMoviment;
     }
 
-    void OnCollisionEnter2D(Collision2D  collision) 
-    {
-        if(collision.rigidbody.bodyType == RigidbodyType2D.Static){
-            notBloqued = false;
-        }
-    }
-
-    public void AddImpulse(Vector2 direction){
-        rb.AddForce(direction * damageImpulse, ForceMode2D.Impulse);
-        timer = -1;
-    }
-
-    private Vector2 GetContactiDirection(Vector2 contact){
-        var isHorizontal = Math.Abs(contact.x) > Math.Abs(contact.y);
-        if(isHorizontal)
-        {
-            return new Vector2(contact.x < 0 ? -1 : 1, 0);
-        }
-
-        return new Vector2(0, contact.y < 0 ? -1 : 1);
-    }
-
-    void OnCollisionExit2D(Collision2D  collision)
-    {
-        if(collision.rigidbody.bodyType == RigidbodyType2D.Static){
-            notBloqued = true;
-        }
-    }
-
     void FixedUpdate() {
         if(agent.isStopped){
             return;
@@ -70,11 +41,6 @@ public class EnemyMovement : MonoBehaviour
         }
         
         this.SetStateParameters();
-    }
-
-    private void SetStateParameters(){
-        animator.SetFloat("DirX", movement.x);
-        animator.SetFloat("DirY", movement.y);
     }
 
     private void DoLinearMoviment(){
@@ -108,30 +74,43 @@ public class EnemyMovement : MonoBehaviour
         return new Vector2(0, movementDistance);
     }
 
+    private void SetStateParameters(){
+        animator.SetFloat("DirX", movement.x);
+        animator.SetFloat("DirY", movement.y);
+    }
+
     public void SetTargetPosition(Vector3 position){
         targetPosition = position;
     }
 
-    public void TurnToTarget(Vector2 direction){
+    public void AddImpulse(Vector2 direction, float time){
+        rb.AddForce(direction * damageImpulse, ForceMode2D.Impulse);
+        timer = -time;
+    }
+
+    public void TurnToDirection(Vector2 direction){
         movement = direction;
         SetStateParameters();
-        timer = -0.5f;
     }
 
     public void Stop(){
-        if(agent.isStopped){
-            return;
-        }
-
         agent.isStopped = true;
-        timer = -0;
+        timer = 0;
+    }
+
+    public void StopByTime(float time){
+        timer = -time;
     }
 
     public void Move(){
-        if(!agent.isStopped){
-            return;
-        }
-
         agent.isStopped = false;
+    }
+
+    public void WayBloqued(){
+        notBloqued = false;
+    }
+
+    public void WayOpen(){
+       notBloqued = true;
     }
 }
