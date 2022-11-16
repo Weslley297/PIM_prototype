@@ -33,7 +33,7 @@ public class PlayerMovementScript : MonoBehaviour
             return;
         }
 
-        transform.localScale = getTranslationLeftOrRight();
+        //transform.localScale = getTranslationLeftOrRight();
 
         rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
     }

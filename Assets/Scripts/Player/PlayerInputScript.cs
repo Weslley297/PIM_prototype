@@ -33,7 +33,7 @@ public class PlayerInputScript : MonoBehaviour
             playerAttack.SwordAttack();
             playerAudio.PlayAttackSound();
             timer = -playerAttack.GetAttackDelay();
-            playerMovement.StopByTime(timer);
+            playerMovement.StopByTime(timer);            
             return;
         }
 

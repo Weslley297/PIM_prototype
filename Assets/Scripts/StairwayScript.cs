@@ -82,7 +82,7 @@ public class StairwayScript : MonoBehaviour
     } 
 
     private void setLimitsFromCamera(){
-        mainCamera.GetComponent<CameraAudioScript>().PlayBattleSound();
+        //mainCamera.GetComponent<CameraAudioScript>().PlayBattleSound();
         mainCamera.GetComponent<CameraScript>()
             .setCameraLimits(
                 exitScript.topCameraLimit, 
