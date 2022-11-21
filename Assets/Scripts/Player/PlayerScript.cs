@@ -85,4 +85,12 @@ public class PlayerScript : MonoBehaviour
         playerAudio.PlayDieSound();
         playerInput.InputDisable();
     }
+
+    public void AddLife(float value){
+        HP += value;
+        
+        if(HP > maxHP){
+            HP = maxHP;
+        }
+    }
 }

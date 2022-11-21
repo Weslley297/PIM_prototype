@@ -24,7 +24,7 @@ public class PlayerAudioScript : MonoBehaviour
         audioSource.priority = 50;
         audioSource.volume = 0.9f;
         
-        audioSource.pitch = getPitch(1.4f, 1.8f);
+        audioSource.pitch = getPitch(1.4f, 1.6f);
         audioSource.Play();
     }
 

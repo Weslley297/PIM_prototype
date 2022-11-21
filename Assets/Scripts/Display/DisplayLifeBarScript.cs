@@ -45,7 +45,6 @@ public class DisplayLifeBarScript : MonoBehaviour
             index++;
         }
 
-        Debug.Log(index);
         var emptyHearts = (maxLife - index * 20) / 20;
         for (int i = 1; i <= emptyHearts; i++)
         {
