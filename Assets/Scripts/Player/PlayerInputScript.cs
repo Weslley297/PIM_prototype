@@ -30,32 +30,48 @@ public class PlayerInputScript : MonoBehaviour
         }
 
         if (Input.GetButtonDown("Attack")){
-            playerAttack.SwordAttack();
-            playerAudio.PlayAttackSound();
-            timer = -playerAttack.GetAttackDelay();
-            playerMovement.StopByTime(timer);            
+            DoAttack();        
             return;
         }
 
         movement = new Vector2(0, 0);
         inputHorizontal = Input.GetAxisRaw("Horizontal");
         if(inputHorizontal != 0){
-            movement = new Vector2(inputHorizontal, 0);
-            playerMovement.SetMovement(movement);
-            playerAudio.PlayWalkSound();
+            DoHorizontalMovement(inputHorizontal);
             return;
         }
 
         inputVertical = Input.GetAxisRaw("Vertical");
         if(inputVertical != 0){
-            movement = new Vector2(0, inputVertical);
-            playerMovement.SetMovement(movement);
-            playerAudio.PlayWalkSound();
+            DoVerticalMovement(inputVertical);
             return;
         }
         
         playerAudio.StopWalkSound();
         playerMovement.SetMovement(movement);
+    }
+
+    public void DoAttack(){
+        if(playerAttack.NotHaveASword()){
+            return;
+        }
+
+        playerAttack.SwordAttack();
+        playerAudio.PlayAttackSound();
+        timer = -playerAttack.GetAttackDelay();
+        playerMovement.StopByTime(timer);  
+    }
+
+    private void DoHorizontalMovement(float input){
+        movement = new Vector2(input, 0);
+        playerMovement.SetMovement(movement);
+        playerAudio.PlayWalkSound();
+    }
+
+    private void DoVerticalMovement(float input){
+        movement = new Vector2(0, input);
+        playerMovement.SetMovement(movement);
+        playerAudio.PlayWalkSound();
     }
 
     public void InputDisableByTime(float time){

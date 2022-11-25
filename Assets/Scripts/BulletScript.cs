@@ -37,5 +37,21 @@ public class BulletScript : MonoBehaviour
 
     public void SetDirection(Vector2 dir){
         direction = dir;
+        
+        if(dir.x > 0){
+            transform.Rotate(new Vector3(0, 0, 0));
+        }
+
+        if(dir.x < 0){
+            transform.Rotate(new Vector3(0, 0, 180));
+        }
+
+        if(dir.y > 0){
+            transform.Rotate(new Vector3(0, 0, 90));
+        }
+
+        if(dir.y < 0){
+            transform.Rotate(new Vector3(0, 0, 270));
+        }
     }
 }

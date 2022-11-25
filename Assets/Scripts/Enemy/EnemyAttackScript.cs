@@ -85,7 +85,7 @@ public class EnemyAttackScript : MonoBehaviour
     }
 
     private Vector2 GetShootPosition(){
-        var size = attackDirection * sprite.bounds.size;
+        var size = attackDirection * (sprite.bounds.size / 2);
         return new Vector2(transform.position.x + size.x, transform.position.y + size.y);
     }
 

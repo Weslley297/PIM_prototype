@@ -20,7 +20,7 @@ public class SwordScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         sprite.enabled = false;
-        timer = -0.5f;
+        timer = -1f;
 
         SetSwordPosition();
     }
@@ -41,17 +41,15 @@ public class SwordScript : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-        
         transform.position = swordUser.transform.position + position;
         if(timer < -0.4){
+            timer += Time.deltaTime;
             return;
         }
 
         if(timer <= 0 && collider == null){
             CreateCollider();
-
-            sprite.enabled = true;
+            timer += Time.deltaTime;
             return;
         }
 
@@ -68,25 +66,25 @@ public class SwordScript : MonoBehaviour
 
     private void SetSwordPosition(){
         if(direction.y < 0){
-            position = new Vector3(0, -1.1f, 0);
+            position = new Vector3(0, -1.0f, 0);
             transform.Rotate(new Vector3(0, 0, 180f));
             sprite.sortingOrder = 6;
         }
 
         if(direction.y > 0){
-            position = new Vector3(0, 0.4f, 0);
+            position = new Vector3(0, 1f, 0);
             transform.Rotate(new Vector3(0, 0, 0));
             sprite.sortingOrder = 4;
         }
 
         if(direction.x < 0){
-            position = new Vector3(-0.85f, -0.38f, 0);
+            position = new Vector3(-1, 0, 0);
             transform.Rotate(new Vector3(0, 0, 270));
             sprite.sortingOrder = 5;
         }
 
         if(direction.x > 0){
-            position = new Vector3(0.85f, -0.38f, 0);
+            position = new Vector3(1f, 0, 0);
             transform.Rotate(new Vector3(0, 0, 270));
             sprite.sortingOrder = 5;
         }

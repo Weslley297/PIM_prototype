@@ -7,7 +7,7 @@ public class PlayerAttackScript : MonoBehaviour
     private GameObject sword;
     private Animator animator;
     private float timer;
-    private float attackDelay = 0.3f;
+    private float attackDelay = 1f;
 
     void Start()
     {
@@ -61,5 +61,13 @@ public class PlayerAttackScript : MonoBehaviour
 
     public float GetAttackDelay(){
         return attackDelay;
+    }
+
+    public bool NotHaveASword(){
+        return swordPrefab == null;
+    }
+
+    public void SetSword(GameObject swordObj){
+        swordPrefab = swordObj;
     }
 }

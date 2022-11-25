@@ -9,6 +9,9 @@ TagManager:
   - Sword
   - Environment
   - Controller
+  - PlayerLight
+  - DinamicLight
+  - Destructible
   layers:
   - Default
   - TransparentFX
