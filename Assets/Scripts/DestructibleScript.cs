@@ -23,9 +23,9 @@ public class DestructibleScript : MonoBehaviour
         }
 
         colliding = true;
-        sprite.enabled = false;
         active = true;
 
+        sprite.enabled = false;
         transform.GetChild(0).gameObject
             .GetComponent<FadeOutEffectScript>()
             .Activate();
@@ -40,10 +40,10 @@ public class DestructibleScript : MonoBehaviour
             return;
         }
 
-        // timer += Time.deltaTime;
-        // if(timer >= delay){
-        //     Destroy(gameObject);
-        // }
+        timer += Time.deltaTime;
+        if(timer >= delay){
+            Destroy(gameObject);
+        }
     }
 
 }
