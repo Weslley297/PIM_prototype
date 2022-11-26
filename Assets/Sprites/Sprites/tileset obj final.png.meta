@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -151,9 +151,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 224
-        y: 385
+        y: 384
         width: 48
-        height: 25
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,7 +174,7 @@ TextureImporter:
         x: 15
         y: 383
         width: 34
-        height: 22
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,7 +195,7 @@ TextureImporter:
         x: 65
         y: 384
         width: 31
-        height: 21
+        height: 60
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,7 +237,7 @@ TextureImporter:
         x: 15
         y: 319
         width: 34
-        height: 20
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,7 +258,7 @@ TextureImporter:
         x: 65
         y: 320
         width: 31
-        height: 19
+        height: 60
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -342,7 +342,7 @@ TextureImporter:
         x: 208
         y: 272
         width: 64
-        height: 34
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -587,132 +587,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: tileset obj final_23
-      rect:
-        serializedVersion: 2
-        x: 208
-        y: 306
-        width: 64
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 698a394868e32b54bb146e9e0a6b7fd2
-      internalID: 1509354375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset obj final_24
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 410
-        width: 48
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73203ea5556ffee44b0f6a53ed3455d7
-      internalID: -83478700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset obj final_25
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 339
-        width: 31
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7e67838e595d8844aabac30736104e9
-      internalID: -235514929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset obj final_26
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 339
-        width: 34
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1db5eafd96b32be4bb64505f51253178
-      internalID: -1380921786
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset obj final_27
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 405
-        width: 34
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc47532322138454e8d6ccd5d591c797
-      internalID: 1562485894
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset obj final_28
-      rect:
-        serializedVersion: 2
-        x: 65
-        y: 405
-        width: 31
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79378b9acd7583840b3e0302c170761a
-      internalID: -954105629
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -722,19 +596,13 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 15d421e41a0c8ac4590b63b940ee667f, type: 3}
-      name: _Emission
+    secondaryTextures: []
     nameFileIdTable:
-      tileset obj final_11: -1100133090
-      tileset obj final_27: 1562485894
-      tileset obj final_23: 1509354375
+      tileset obj final_12: -2030391245
       tileset obj final_3: -612178919
       tileset obj final_6: 513270262
-      tileset obj final_24: -83478700
       tileset obj final_4: 414500717
       tileset obj final_7: -2117850031
-      tileset obj final_28: -954105629
       tileset obj final_15: -1804615555
       tileset obj final_18: 893779781
       tileset obj final_1: -1831763138
@@ -745,16 +613,14 @@ TextureImporter:
       tileset obj final_8: 283573767
       tileset obj final_9: -200980369
       tileset obj final_10: 1033836452
-      tileset obj final_25: -235514929
       tileset obj final_2: 916205671
       tileset obj final_19: 2039673251
-      tileset obj final_26: -1380921786
       tileset obj final_13: -1017534165
       tileset obj final_21: -34738366
       tileset obj final_5: 337018581
       tileset obj final_16: -1660967029
       tileset obj final_22: -601853436
-      tileset obj final_12: -2030391245
+      tileset obj final_11: -1100133090
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
