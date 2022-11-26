@@ -13,26 +13,16 @@ public class DestructibleScript : MonoBehaviour
     private void Start() {
         sprite = GetComponent<SpriteRenderer>();
     }
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if(colliding){
-            return;
-        }
 
-        if(!collision.collider.tag.Equals("Sword")){
-            return;
-        }
-
-        colliding = true;
+    public void Destruct(){
         active = true;
-
         sprite.enabled = false;
-        transform.GetChild(0).gameObject
-            .GetComponent<FadeOutEffectScript>()
-            .Activate();
 
-        transform.GetChild(1).gameObject
-            .GetComponent<FadeOutEffectScript>()
-            .Activate();
+        foreach (Transform child in transform)
+        {
+            child.gameObject.GetComponent<FadeOutEffectScript>()
+                .Activate();
+        }
     }
 
     private void Update() {

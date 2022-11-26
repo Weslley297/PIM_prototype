@@ -8,35 +8,41 @@ public class SwordScript : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Vector3 position;
-    private Collider2D collider;
-    private Vector2 colliderSize = new Vector2(1.3f, 1.3f);
-    private Vector2 colliderOffset= new Vector2(0, 0.4f);
+    private BoxCollider2D swordcollider;
     private Vector2 direction;
-
-    private float timer = 0;
+    private float timer;
+    private bool colliding;
 
     private void Start() {
         sprite = GetComponent<SpriteRenderer>();
+        swordcollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
 
-        sprite.enabled = false;
-        timer = -1f;
-
-        SetSwordPosition();
+        swordcollider.enabled = false;
+        timer = -0.6f;
     }
 
     void OnTriggerEnter2D(Collider2D otherCollider) 
     {
+        if(colliding){
+            return;
+        }
+
         if(otherCollider.tag == "Enemy"){
+            colliding = true;
             otherCollider.gameObject
                 .GetComponent<EnemyScript>()
                 .TakeDamage(damage, direction);
-
-            if(collider != null){
-                collider.enabled = false;
-            }
-            
         }
+
+        if(otherCollider.tag == "Destructible"){
+            colliding = true;
+            otherCollider.gameObject
+                .GetComponent<DestructibleScript>()
+                .Destruct();
+        }
+
+        colliding = false;
     }
 
     void Update()
@@ -47,46 +53,36 @@ public class SwordScript : MonoBehaviour
             return;
         }
 
-        if(timer <= 0 && collider == null){
-            CreateCollider();
+        if(timer <= 0){
+            swordcollider.enabled = true;
             timer += Time.deltaTime;
             return;
         }
 
-        if(timer > 0 && collider){
+        if(timer > 0){
             Destroy(gameObject);
         }
     }
 
-    private void CreateCollider(){
-        BoxCollider2D collider = gameObject.AddComponent<BoxCollider2D>();
-        collider.size = colliderSize;
-        collider.offset = colliderOffset;
-    }
-
-    private void SetSwordPosition(){
+    public void SetSwordPosition(){
         if(direction.y < 0){
             position = new Vector3(0, -1.0f, 0);
             transform.Rotate(new Vector3(0, 0, 180f));
-            sprite.sortingOrder = 6;
         }
 
         if(direction.y > 0){
             position = new Vector3(0, 1f, 0);
             transform.Rotate(new Vector3(0, 0, 0));
-            sprite.sortingOrder = 4;
         }
 
         if(direction.x < 0){
             position = new Vector3(-1, 0, 0);
             transform.Rotate(new Vector3(0, 0, 270));
-            sprite.sortingOrder = 5;
         }
 
         if(direction.x > 0){
             position = new Vector3(1f, 0, 0);
             transform.Rotate(new Vector3(0, 0, 270));
-            sprite.sortingOrder = 5;
         }
     }
 

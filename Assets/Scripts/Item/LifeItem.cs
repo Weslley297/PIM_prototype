@@ -24,7 +24,5 @@ public class LifeItem : MonoBehaviour
             collider.gameObject.GetComponent<PlayerScript>().AddLife(amount);
             Destroy(gameObject);
         }
-
-        colliding = false;
     }
 }
