@@ -33,6 +33,8 @@ public class PlayerMovementScript : MonoBehaviour
             return;
         }
 
+        //transform.localScale = getTranslationLeftOrRight();
+
         rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
     }
 
@@ -46,6 +48,12 @@ public class PlayerMovementScript : MonoBehaviour
             animator.SetFloat("DirY", direction.y);  
         }
     }
+
+    private Vector3 getTranslationLeftOrRight(){
+        return movement.x == 0 ? transform.localScale
+            : movement.x > 0 ? RIGHT : LEFT;
+    }
+
     public void StopByTime(float time){
         movement = new Vector2(0, 0);
         timer = -time;

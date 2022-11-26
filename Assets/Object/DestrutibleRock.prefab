@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 20
-  delay: 1
+  delay: 3
 --- !u!1 &544148112482284796
 GameObject:
   m_ObjectHideFlags: 0

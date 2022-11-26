@@ -13,7 +13,6 @@ public class EnemyScript : MonoBehaviour
     private EnemyAttackScript enemyAttack;
     private EnemyAudioScript enemyAudio;
     private EnemyAIScript enemyAI;
-    private FadeOutEffectScript enemyFadeOutEffect;
     private float timer = 0;
     private bool dead;
 
@@ -26,7 +25,6 @@ public class EnemyScript : MonoBehaviour
         enemyAttack = GetComponent<EnemyAttackScript>();
         enemyAudio = GetComponent<EnemyAudioScript>();
         enemyAI = GetComponent<EnemyAIScript>();
-        enemyFadeOutEffect = GetComponent<FadeOutEffectScript>();
     }
 
     void OnCollisionEnter2D(Collision2D collision) 
@@ -70,7 +68,7 @@ public class EnemyScript : MonoBehaviour
         }
 
         if(dead){
-            enemyFadeOutEffect.Activate();
+            Destroy(gameObject);
             return;
         }
     }

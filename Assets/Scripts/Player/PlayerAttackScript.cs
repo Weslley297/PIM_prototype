@@ -6,9 +6,8 @@ public class PlayerAttackScript : MonoBehaviour
 
     private GameObject sword;
     private Animator animator;
-    private float attackDelay = 0.6f;
-    private float timer = 0;
-    private bool attacking;
+    private float timer;
+    private float attackDelay = 1f;
 
     void Start()
     {
@@ -17,30 +16,24 @@ public class PlayerAttackScript : MonoBehaviour
 
     void Update()
     {
-        if(!attacking){
-            return;
-        }
-
         if(timer < 0){
             timer += Time.deltaTime;
             return;
         }
 
-        if(timer >= 0){
-            attacking = false;
-            SetAttackingParamater();
+        if(sword != null){
+            SetAttackingParamater(false);
             Destroy(sword);
         }
     }
 
     public void SwordAttack(){
-        if(swordPrefab == null && timer < 0){
+        if(swordPrefab == null){
             return;
         }
 
-        attacking = true;
         CreateSword();
-        SetAttackingParamater();
+        SetAttackingParamater(true);
         timer = -attackDelay;
     }
 
@@ -53,7 +46,6 @@ public class PlayerAttackScript : MonoBehaviour
 
         var direction =  GetPlayerDirection(); 
         swordScript.SetDirection(direction);
-        swordScript.SetSwordPosition();
     }
 
     private Vector2 GetPlayerDirection(){
@@ -63,7 +55,7 @@ public class PlayerAttackScript : MonoBehaviour
         );
     }
 
-    private void SetAttackingParamater(){
+    private void SetAttackingParamater(bool attacking){
         animator.SetBool("Attacking", attacking);
     }
 

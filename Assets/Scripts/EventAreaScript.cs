@@ -6,7 +6,6 @@ public class EventAreaScript : MonoBehaviour
 {
     public bool emitOnce;
     public string eventName = "";
-    public string outEventName = "";
     private EventControllerScript eventController;
     private bool colliding;
     
@@ -17,29 +16,13 @@ public class EventAreaScript : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
-        if(colliding || string.IsNullOrEmpty(eventName)){
+        if(colliding){
             return;
         }
 
         if(collider.tag.Equals("Player")){
             colliding = true;
             eventController.EventEmit(eventName);
-
-            if(emitOnce){
-                Destroy(gameObject);
-            } 
-            
-        }
-        
-    }
-
-    private void OnTriggerExit2D(Collider2D collider) {
-        if(string.IsNullOrEmpty(outEventName)){
-            return;
-        }
-
-        if(collider.tag.Equals("Player")){
-            eventController.EventEmit(outEventName);
             Destroy(gameObject);
         }
         

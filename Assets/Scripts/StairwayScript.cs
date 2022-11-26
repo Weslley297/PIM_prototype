@@ -29,7 +29,7 @@ public class StairwayScript : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
-        if(collider.tag == "Player"){  
+       if(collider.tag == "Player"){  
             player = collider.gameObject;
             playerMovement = player.GetComponent<PlayerMovementScript>();
             playerInput = player.GetComponent<PlayerInputScript>();
