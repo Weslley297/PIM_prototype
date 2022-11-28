@@ -28,7 +28,6 @@ public class EventAreaScript : MonoBehaviour
             if(emitOnce){
                 Destroy(gameObject);
             } 
-            
         }
         
     }

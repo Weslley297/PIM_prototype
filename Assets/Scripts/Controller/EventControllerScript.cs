@@ -29,7 +29,7 @@ public class EventControllerScript : MonoBehaviour
             return;
         }
 
-        if(name.Equals("LabEnter")){
+        if(name.Equals("LabEnterEvent")){
             LabEnterEvent();
         }
 
