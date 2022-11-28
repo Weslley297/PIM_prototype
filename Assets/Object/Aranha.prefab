@@ -151,7 +151,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.2
 --- !u!82 &7879209994198211792
 AudioSource:
   m_ObjectHideFlags: 0
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0389bdd192940045bd5dc9608ecedc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 50
+  HP: 20
 --- !u!114 &7879209994198211819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +344,7 @@ MonoBehaviour:
   moveSpeed: 3
   movimentDelay: 1
   stopDelay: 0.4
-  damageImpulse: 10
+  damageImpulse: 15
   linearMoviment: 1
 --- !u!114 &8593540396013977914
 MonoBehaviour:

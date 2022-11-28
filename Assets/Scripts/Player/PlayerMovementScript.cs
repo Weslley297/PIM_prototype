@@ -22,6 +22,8 @@ public class PlayerMovementScript : MonoBehaviour
 
     public void AddImpulse(Vector2 direction, float time){
         rb.AddForce(direction * damageImpulse, ForceMode2D.Impulse);
+        SetMovement(-direction);
+        animator.SetBool("Damaged", true); 
         timer = -time;
     }
 
@@ -33,6 +35,7 @@ public class PlayerMovementScript : MonoBehaviour
             return;
         }
 
+        animator.SetBool("Damaged", false);  
         rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
     }
 
@@ -44,8 +47,9 @@ public class PlayerMovementScript : MonoBehaviour
         if(speed > 0){
             animator.SetFloat("DirX", direction.x);
             animator.SetFloat("DirY", direction.y);  
-        }
+        }  
     }
+
     public void StopByTime(float time){
         movement = new Vector2(0, 0);
         timer = -time;
