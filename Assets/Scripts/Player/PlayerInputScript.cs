@@ -76,10 +76,12 @@ public class PlayerInputScript : MonoBehaviour
 
     public void InputDisableByTime(float time){
         timer = -time;
+        playerAudio.StopSound();
     }
 
     public void InputDisable(){
         inputDisabled = true;
+        playerAudio.StopSound();
     }
     
     public void InputEnable(){

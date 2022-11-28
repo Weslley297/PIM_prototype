@@ -79,7 +79,7 @@ public class PlayerScript : MonoBehaviour
 
         playerRenderer.sortingOrder = 0;
         playerCollider.enabled = false;
-        // playerAnimator.SetBool("Dead", dead);
+        playerAnimator.SetBool("Dead", dead);
 
         playerMovement.SetMoveSpeed(0);
         playerAudio.PlayDieSound();

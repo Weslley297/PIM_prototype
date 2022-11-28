@@ -5,6 +5,7 @@ public class EventControllerScript : MonoBehaviour
     private LightControllerScript lightController;
     private SoundControllerScript soundController;
     private EnemyControllerScript enemyController;
+    private DialogControllerScript dialogController;
     private PlayerLightScript playerLight;
     private PlayerInputScript playerInput;
     private PlayerMovementScript playerMovement;
@@ -15,6 +16,7 @@ public class EventControllerScript : MonoBehaviour
         lightController = GetComponent<LightControllerScript>();
         soundController = GetComponent<SoundControllerScript>();
         enemyController = GetComponent<EnemyControllerScript>();
+        dialogController = GetComponent<DialogControllerScript>();
 
         var player = GameObject.FindGameObjectWithTag("Player");
         playerLight = player.GetComponent<PlayerLightScript>();
@@ -42,19 +44,23 @@ public class EventControllerScript : MonoBehaviour
         if(name.Equals("BridgeOutEvent")){
             BridgeOutEvent();
         }
+
+        if(name.Equals("LabDialogEvent")){
+            LabDialogEvent();
+        }
     }
 
     private void LabEnterEvent(){
         playerLight.InactiveLights();
         lightController.SetGlobalLightIntensity(0.75f);
-        soundController.PlayLabMusic();
     }
 
     private void LabAutoDestructionEvent(){
         playerLight.InactiveLights();
         
-        lightController.SetGlobalLightIntensity(0.2f);
+        lightController.SetGlobalLightIntensity(0.35f);
         lightController.SetLightsColor(Color.red);
+        lightController.SetInnerLightsColor(Color.white);
         lightController.activeIntermittence();
         soundController.PlayBattleMusic();
 
@@ -75,5 +81,11 @@ public class EventControllerScript : MonoBehaviour
     private void BridgeOutEvent(){
         playerInput.InputEnable();
         playerMovement.SetMoveSpeed(moveSpeed);
+    }
+
+    private void LabDialogEvent(){
+        playerInput.InputDisable();
+        playerMovement.StopByTime(1);
+        dialogController.InitLabDialog();
     }
 }
