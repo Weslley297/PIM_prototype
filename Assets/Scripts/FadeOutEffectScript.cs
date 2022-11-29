@@ -18,7 +18,7 @@ public class FadeOutEffectScript : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();        
-        tranparence = sprite.color.a;
+        tranparence = 1;
     }
 
     void Update()

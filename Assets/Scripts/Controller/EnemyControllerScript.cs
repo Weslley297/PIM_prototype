@@ -15,7 +15,7 @@ public class EnemyControllerScript : MonoBehaviour
     }
 
     public void CreateLabEnemies(){
-        CreateBabyAranhaOn(new Vector2(4f, 80f));
+        CreateBabyAranhaOn(new Vector2(4f, 84f));
         CreateBabyAranhaOn(new Vector2(13f, 86f));
         CreateBabyAranhaOn(new Vector2(17f, 79f));
 
@@ -24,7 +24,7 @@ public class EnemyControllerScript : MonoBehaviour
         CreateBabyAranhaOn(new Vector2(17f, 55f));
         CreateBabyAranhaOn(new Vector2(20f, 48f));
         CreateBabyAranhaOn(new Vector2(15f, 50f));
-        CreateBabyAranhaOn(new Vector2(8f, 52f));
+        CreateBabyAranhaOn(new Vector2(6f, 52f));
         CreateBabyAranhaOn(new Vector2(4f, 46f));
         CreateBabyAranhaOn(new Vector2(0f, 51f));
 

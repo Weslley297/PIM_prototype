@@ -11,6 +11,7 @@ public class EventControllerScript : MonoBehaviour
     private PlayerLightScript playerLight;
     private PlayerInputScript playerInput;
     private PlayerMovementScript playerMovement;
+    private PlayerAttackScript playerAttack;
     private CloseCurtainScript curtainScript;
     private float moveSpeed;
 
@@ -27,6 +28,7 @@ public class EventControllerScript : MonoBehaviour
         playerLight = player.GetComponent<PlayerLightScript>();
         playerInput = player.GetComponent<PlayerInputScript>();
         playerMovement = player.GetComponent<PlayerMovementScript>();
+        playerAttack = player.GetComponent<PlayerAttackScript>();
 
         curtainScript.Open(0.01f);
     }
@@ -46,6 +48,12 @@ public class EventControllerScript : MonoBehaviour
         }
         if(name.Equals("ListemTheHologramEvent")){
             ListemTheHologramEvent();
+        }
+        if(name.Equals("DoorDialogEvent")){
+            DoorDialogEvent();
+        }
+        if(name.Equals("DestructibleRockDialogEvent")){
+            DestructibleRockDialogEvent();
         }
         if(name.Equals("BridgeCrossEvent")){
             BridgeCrossEvent();
@@ -110,6 +118,27 @@ public class EventControllerScript : MonoBehaviour
         playerMovement.StopByTime(1);
         dialogController.InitLabDialog();
         playerMovement.SetMoveSpeed(moveSpeed);
+    }
+
+    private void DoorDialogEvent(){
+        if(!playerAttack.NotHaveASword()){
+            return;
+        }
+        
+        playerMovement.SetMovement(new Vector2(-1, 0));
+        playerInput.InputDisableByTime(1);
+        playerMovement.StopByTime(1);
+        dialogController.InitDoorDialog();
+    }
+
+    private void DestructibleRockDialogEvent(){
+        if(!playerAttack.NotHaveASword()){
+            return;
+        }
+        
+        playerInput.InputDisableByTime(1);
+        playerMovement.StopByTime(1);
+        dialogController.InitDestructibleRockDialog();
     }
 
     private void LabExitEvent(){

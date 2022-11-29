@@ -11,6 +11,7 @@ public class DialogScript : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private string fullText = "";
     private bool writefinish = true;
+    private bool playSound;
     private float timer;
     private int index;
     
@@ -54,12 +55,15 @@ public class DialogScript : MonoBehaviour
     }
 
     public void SetText(string text){
-        audioSource.Play();
         fullText = text;
         textMesh.text = "";
         index = 0;
         iconBlink.Inactive();
         writefinish = false;
+
+        if(playSound){
+            audioSource.Play();
+        }
     }
 
     public bool isFinished(){
@@ -72,5 +76,9 @@ public class DialogScript : MonoBehaviour
 
     public void Hide(){
         rectTransform.localScale = new Vector3(0, 0, 0);
+    }
+
+    public void SetPlaySound(bool value){
+        playSound = value;
     }
 }
