@@ -12,7 +12,6 @@ public class DialogControllerScript : MonoBehaviour
     void Start()
     {
         dialogScript = GameObject.Find("DialogBox").GetComponent<DialogScript>();
-
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputScript>();
     }
 
@@ -37,6 +36,7 @@ public class DialogControllerScript : MonoBehaviour
         if(index == dialog.Count){
             dialogScript.Hide();
             playerInput.InputEnable();
+            actived = false;
             return;
         }
 
@@ -45,8 +45,10 @@ public class DialogControllerScript : MonoBehaviour
     }
 
     public void InitLabDialog(){
-        dialog.Add("isso é um teste grande");
-        dialog.Add("Este é o segundo teste um pouco bem maior");
+        dialog.Add("Diário pessoal, dia 78 após o incidente");
+        dialog.Add("O mundo de maravilhas que idealizei com a utilização da solarita é uma farsa, a Corenetic causou imenso impacto em nosso planeta, eu sou um tolo! ");
+        dialog.Add("Após inúmeros dias neste inferno, finalmente criei um protótipo de arma que pode me ajudar a sair daqui, porém, não sei se mereço mais uma chance depois de tudo causei… ");
+        dialog.Add("&&&$$$$@@@@@ … trava de seguranç@@@@@@&&&&$$$$ ..cuidado.");
 
         Active();
         DialogInteract();

@@ -26,16 +26,20 @@ public class DoorScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider.tag.Equals("Player")){
+            TryOpenDoor();
+        }
+    }
+
+    private void TryOpenDoor(){
+        if(locked && itemController.UseTheKey(gameObject)){
             OpenDoor();
         }
     }
 
-    private void OpenDoor(){
-        if(locked && itemController.UseTheKey(gameObject)){
-            locked = false;
-            SetStateParameters();
-            audioSource.Play();
-        }
+    public void OpenDoor(){
+        locked = false;
+        SetStateParameters();
+        audioSource.Play();
     }
 
     void Update()

@@ -6,11 +6,16 @@ public class LifeItem : MonoBehaviour
 {
     public float amount;
 
-    private ItemControllerScript itemController;
+    private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
+    
     private bool colliding;
 
     private void Start() {
-        itemController = GameObject.Find("GameController").GetComponent<ItemControllerScript>();
+        audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
     
     void OnTriggerEnter2D(Collider2D collider) {
@@ -20,9 +25,19 @@ public class LifeItem : MonoBehaviour
 
         if(collider.tag.Equals("Player")){
             colliding = true;
-            itemController.CatchLifeItem();
-            collider.gameObject.GetComponent<PlayerScript>().AddLife(amount);
-            Destroy(gameObject);
+            GetItem(collider);
+        }
+    }
+
+    private void GetItem(Collider2D collider){
+        collider.gameObject.GetComponent<PlayerScript>().AddLife(amount);
+        boxCollider.enabled = false;
+        spriteRenderer.enabled = false;
+        audioSource.Play();
+
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
         }
     }
 }

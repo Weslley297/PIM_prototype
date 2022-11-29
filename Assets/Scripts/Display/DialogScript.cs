@@ -6,6 +6,7 @@ public class DialogScript : MonoBehaviour
     public float typingSpeed;
 
     private RectTransform rectTransform;
+    private AudioSource audioSource;
     private IconBlinkScript iconBlink;
     private TextMeshProUGUI textMesh;
     private string fullText = "";
@@ -15,6 +16,7 @@ public class DialogScript : MonoBehaviour
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rectTransform = GetComponent<RectTransform>();
         iconBlink = GameObject.Find("DialogIcon").GetComponent<IconBlinkScript>();
         textMesh = GameObject.Find("DialogText").GetComponent<TextMeshProUGUI>();
@@ -44,6 +46,7 @@ public class DialogScript : MonoBehaviour
     }
 
     public void setWriteFinish(){
+        audioSource.Stop();
         textMesh.text = fullText;
         index = fullText.Length;
         iconBlink.Active();
@@ -51,6 +54,7 @@ public class DialogScript : MonoBehaviour
     }
 
     public void SetText(string text){
+        audioSource.Play();
         fullText = text;
         textMesh.text = "";
         index = 0;

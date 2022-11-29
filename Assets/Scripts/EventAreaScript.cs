@@ -33,11 +33,13 @@ public class EventAreaScript : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collider) {
-        if(string.IsNullOrEmpty(outEventName)){
+        
+        if(!colliding || string.IsNullOrEmpty(outEventName)){
             return;
         }
 
         if(collider.tag.Equals("Player")){
+            colliding = false;
             eventController.EventEmit(outEventName);
             Destroy(gameObject);
         }

@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 7879209994198211816}
   - component: {fileID: 7879209994198211817}
   - component: {fileID: 7879209994198211822}
+  - component: {fileID: 7432662876367039141}
   m_Layer: 0
   m_Name: Aranha
   m_TagString: Enemy
@@ -127,7 +128,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.5
-  m_LinearDrag: 10
+  m_LinearDrag: 5
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -261,7 +262,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -281,7 +282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0389bdd192940045bd5dc9608ecedc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 20
+  HP: 50
+  dropItem: {fileID: 8141592972044096471, guid: 31e9a021501296f4d8a2740a8de908e3, type: 3}
+  dropRate: 0.4
 --- !u!114 &7879209994198211819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,8 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1558a64ec17bdc4daeb972a31380555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivationDistance: 15
-  inactivationDistance: 15
+  ActivationDistance: 12
+  inactivationDistance: 12
 --- !u!114 &7879209994198211816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +344,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  movimentDelay: 1
+  movimentDelay: 0.8
   stopDelay: 0.4
-  damageImpulse: 15
+  damageImpulse: 7
   linearMoviment: 1
+--- !u!114 &7432662876367039141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7879209994198211793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b6760fb4c204e4e8440890de3c1010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: -0.01}
+  transparenceSpeed: 0.01
+  delay: 1

@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public float HP;
+    public GameObject dropItem;
+    public float dropRate;
 
     private Animator enemyAnimator;
     private Collider2D enemyCollider;
@@ -31,7 +33,7 @@ public class EnemyScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) 
     {
-        if(collision.rigidbody.bodyType == RigidbodyType2D.Static){
+        if(collision.rigidbody != null && collision.rigidbody.bodyType == RigidbodyType2D.Static){
             enemyMovement.WayBloqued();
         }
 
@@ -40,7 +42,7 @@ public class EnemyScript : MonoBehaviour
             
             var player = collision.gameObject.GetComponent<PlayerScript>();
             var direction = GetContactiDirection(collision);
-            player.TakeDamage(10, direction);
+            player.TakeDamage(10, -direction);
         }
     }
 
@@ -57,7 +59,7 @@ public class EnemyScript : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D  collision)
     {
-        if(collision.rigidbody.bodyType == RigidbodyType2D.Static){
+        if(collision.rigidbody != null && collision.rigidbody.bodyType == RigidbodyType2D.Static){
             enemyMovement.WayOpen();
         }
     }
@@ -70,8 +72,19 @@ public class EnemyScript : MonoBehaviour
         }
 
         if(dead){
+            DropTheItem();
             enemyFadeOutEffect.Activate();
+            timer = -enemyFadeOutEffect.delay;
             return;
+        }
+    }
+
+    private void DropTheItem(){
+        var luck = UnityEngine.Random.value;
+        Debug.Log(luck);
+        if(luck <= dropRate){
+            Debug.Log("Item");
+            Instantiate(dropItem, transform.position, Quaternion.identity);
         }
     }
     

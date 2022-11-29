@@ -4521,8 +4521,8 @@ TextureImporter:
       name: LabSpritesheetTemplete2 1_209
       rect:
         serializedVersion: 2
-        x: 208
-        y: 304
+        x: 192
+        y: 272
         width: 16
         height: 16
       alignment: 0
@@ -11353,7 +11353,6 @@ TextureImporter:
       LabSpritesheetTemplete2 1_269: -1424721243
       LabSpritesheetTemplete2 1_256: -1225446266
       LabSpritesheetTemplete2 1_316: -1418102199
-      LabSpritesheetTemplete2 1_372: 641671018
       LabSpritesheetTemplete2 1_366: -254788877
       LabSpritesheetTemplete2 1_193: 960382074
       LabSpritesheetTemplete2 1_212: 1141199031
@@ -11373,6 +11372,7 @@ TextureImporter:
       LabSpritesheetTemplete2 1_346: 1235356062
       LabSpritesheetTemplete2 1_53: -341525489
       LabSpritesheetTemplete2 1_419: -2106022074
+      LabSpritesheetTemplete2 1_174: -1033949103
       LabSpritesheetTemplete2 1_6: -1573373265
       LabSpritesheetTemplete2 1_142: 1794017739
       LabSpritesheetTemplete2 1_291: -2086684607
@@ -11385,8 +11385,8 @@ TextureImporter:
       LabSpritesheetTemplete2 1_322: -2011128756
       LabSpritesheetTemplete2 1_284: 1223462814
       LabSpritesheetTemplete2 1_3: 1464745304
-      LabSpritesheetTemplete2 1_159: 972197192
       LabSpritesheetTemplete2 1_326: 168462357
+      LabSpritesheetTemplete2 1_159: 972197192
       LabSpritesheetTemplete2 1_29: -138741593
       LabSpritesheetTemplete2 1_404: -1111465011
       LabSpritesheetTemplete2 1_363: 2079534209
@@ -11619,8 +11619,8 @@ TextureImporter:
       LabSpritesheetTemplete2 1_381: -867441489
       LabSpritesheetTemplete2 1_118: -610854714
       LabSpritesheetTemplete2 1_500: -781287121
-      LabSpritesheetTemplete2 1_12: -1205356422
       LabSpritesheetTemplete2 1_367: 172024035
+      LabSpritesheetTemplete2 1_12: -1205356422
       LabSpritesheetTemplete2 1_173: -448676846
       LabSpritesheetTemplete2 1_210: 1605789175
       LabSpritesheetTemplete2 1_358: -132131513
@@ -11878,10 +11878,10 @@ TextureImporter:
       LabSpritesheetTemplete2 1_489: 1286844968
       LabSpritesheetTemplete2 1_357: -292902068
       LabSpritesheetTemplete2 1_315: -43443530
-      LabSpritesheetTemplete2 1_467: -1305592407
-      LabSpritesheetTemplete2 1_174: -1033949103
-      LabSpritesheetTemplete2 1_505: -1875375999
       LabSpritesheetTemplete2 1_504: -177498824
+      LabSpritesheetTemplete2 1_467: -1305592407
+      LabSpritesheetTemplete2 1_372: 641671018
+      LabSpritesheetTemplete2 1_505: -1875375999
       LabSpritesheetTemplete2 1_246: 960819769
   spritePackingTag: 
   pSDRemoveMatte: 0

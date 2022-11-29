@@ -4,7 +4,9 @@ public class DestructibleScript : MonoBehaviour
 {
     public float HP;
     public float delay;
+
     private SpriteRenderer sprite;
+    private AudioSource audioSource;
     private bool colliding;
     private bool active;
     private float timer;
@@ -12,6 +14,20 @@ public class DestructibleScript : MonoBehaviour
 
     private void Start() {
         sprite = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider) {
+        if(colliding){
+            return;
+        }
+        if(!collider.tag.Equals("Sword")){
+            return;
+        }
+
+        audioSource.Play();
+        colliding = true;
+        Destruct();
     }
 
     public void Destruct(){
@@ -30,10 +46,10 @@ public class DestructibleScript : MonoBehaviour
             return;
         }
 
-        // timer += Time.deltaTime;
-        // if(timer >= delay){
-        //     Destroy(gameObject);
-        // }
+        timer += Time.deltaTime;
+        if(timer >= delay){
+            Destroy(gameObject);
+        }
     }
 
 }

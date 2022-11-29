@@ -3,20 +3,20 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerLightScript : MonoBehaviour
 {
-    private Light2D light;
+    private Light2D playerlight;
     void Start()
     {
-        light = GameObject.FindGameObjectWithTag("PlayerLight").GetComponent<Light2D>();
+        playerlight = GameObject.FindGameObjectWithTag("PlayerLight").GetComponent<Light2D>();
     }
 
     public void SetLightIntensity(float value){
-        light.intensity = value;
+        playerlight.intensity = value;
     }
     public void InactiveLights(){
-        light.enabled = false;
+        playerlight.enabled = false;
     }
 
     public void ActiveLights(){
-        light.enabled = false;
+        playerlight.enabled = false;
     }
 }

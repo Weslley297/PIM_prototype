@@ -57,6 +57,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     public void SetMovement(Vector2 mov){
         movement = mov;
+        setStateParameters(mov);
     }
 
     public void SetMoveSpeed(float speed){

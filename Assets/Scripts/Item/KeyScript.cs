@@ -4,11 +4,17 @@ public class KeyScript : MonoBehaviour
 {
     public GameObject door;
 
+    private AudioSource audioSource;
     private ItemControllerScript itemController;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
     private bool colliding;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
         itemController = GameObject.Find("GameController").GetComponent<ItemControllerScript>();
     }
     
@@ -19,10 +25,19 @@ public class KeyScript : MonoBehaviour
 
         if(collider.tag.Equals("Player")){
             colliding = true;
-            itemController.AddNewKey(gameObject);
-            Destroy(gameObject);
+            GetItem(collider);
         }
+    }
 
-        colliding = false;
+    private void GetItem(Collider2D collider){
+        itemController.AddNewKey(gameObject);
+        boxCollider.enabled = false;
+        spriteRenderer.enabled = false;
+        audioSource.Play();
+
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 }
