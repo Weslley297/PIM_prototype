@@ -8,7 +8,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    private Vector2 movement = new Vector2(0, 1);
+    private Vector2 movement = new Vector2(0, 0);
     
     private readonly Vector3 LEFT = new Vector3(-1,1,1);
     private readonly Vector3 RIGHT = new Vector3(1,1,1);

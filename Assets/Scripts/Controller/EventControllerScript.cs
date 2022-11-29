@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EventControllerScript : MonoBehaviour
 {
+    public string sceneNameOnEnd;
     private LightControllerScript lightController;
     private SoundControllerScript soundController;
     private EnemyControllerScript enemyController;
@@ -9,10 +11,13 @@ public class EventControllerScript : MonoBehaviour
     private PlayerLightScript playerLight;
     private PlayerInputScript playerInput;
     private PlayerMovementScript playerMovement;
+    private CloseCurtainScript curtainScript;
     private float moveSpeed;
 
     void Start()
     {
+        curtainScript = GameObject.Find("Curtain").GetComponent<CloseCurtainScript>();
+
         lightController = GetComponent<LightControllerScript>();
         soundController = GetComponent<SoundControllerScript>();
         enemyController = GetComponent<EnemyControllerScript>();
@@ -22,6 +27,8 @@ public class EventControllerScript : MonoBehaviour
         playerLight = player.GetComponent<PlayerLightScript>();
         playerInput = player.GetComponent<PlayerInputScript>();
         playerMovement = player.GetComponent<PlayerMovementScript>();
+
+        curtainScript.Open(0.01f);
     }
 
     public void EventEmit(string name){
@@ -34,17 +41,23 @@ public class EventControllerScript : MonoBehaviour
         if(name.Equals("LabAutoDestructionEvent")){
             LabAutoDestructionEvent();
         }
+        if(name.Equals("WalkToHologramEvent")){
+            WalkToHologramEvent();
+        }
+        if(name.Equals("ListemTheHologramEvent")){
+            ListemTheHologramEvent();
+        }
         if(name.Equals("BridgeCrossEvent")){
             BridgeCrossEvent();
         }
         if(name.Equals("BridgeOutEvent")){
             BridgeOutEvent();
         }
-        if(name.Equals("WalkToHologramEvent")){
-            WalkToHologramEvent();
+        if(name.Equals("LabExitEvent")){
+            LabExitEvent();
         }
-        if(name.Equals("ListemTheHologramEvent")){
-            ListemTheHologramEvent();
+        if(name.Equals("EndGameEvent")){
+            EndGame();
         }
     }
 
@@ -61,36 +74,22 @@ public class EventControllerScript : MonoBehaviour
         lightController.SetInnerLightsColor(Color.white);
         lightController.activeIntermittence();
         soundController.PlayBattleMusic();
-
-        enemyController.CreateBabyAranhaOn(new Vector2(4f, 80f));
-        enemyController.CreateBabyAranhaOn(new Vector2(13f, 86f));
-        enemyController.CreateBabyAranhaOn(new Vector2(17f, 79f));
-
-        enemyController.CreateAranhaOn(new Vector2(74f, 47f));
-        
-        enemyController.CreateBabyAranhaOn(new Vector2(17f, 55f));
-        enemyController.CreateBabyAranhaOn(new Vector2(20f, 48f));
-        enemyController.CreateBabyAranhaOn(new Vector2(15f, 50f));
-        enemyController.CreateBabyAranhaOn(new Vector2(8f, 52f));
-        enemyController.CreateBabyAranhaOn(new Vector2(4f, 46f));
-        enemyController.CreateBabyAranhaOn(new Vector2(0f, 51f));
-
-        enemyController.CreateBabyAranhaOn(new Vector2(-43f, 68f));
-        enemyController.CreateBabyAranhaOn(new Vector2(-57f, 61f));
-        enemyController.CreateBabyAranhaOn(new Vector2(-56f, 69f));
-        enemyController.CreateAranhaOn(new Vector2(-50f, 69));
-        
+        enemyController.CreateLabEnemies();   
     }
 
     private void BridgeCrossEvent(){
-        moveSpeed = playerMovement.moveSpeed;
-        playerInput.InputDisable();
-        playerMovement.SetMovement(new Vector2(0, 1));
-        playerMovement.SetMoveSpeed(1f);
+        WalkUp();
 
         GameObject.Find("EarthBridge").gameObject
             .GetComponent<TrapBridgeScript>()
             .Active();
+    }
+
+    private void WalkUp(){
+        moveSpeed = playerMovement.moveSpeed;
+        playerInput.InputDisable();
+        playerMovement.SetMovement(new Vector2(0, 1));
+        playerMovement.SetMoveSpeed(1f);
     }
 
     private void BridgeOutEvent(){
@@ -111,5 +110,14 @@ public class EventControllerScript : MonoBehaviour
         playerMovement.StopByTime(1);
         dialogController.InitLabDialog();
         playerMovement.SetMoveSpeed(moveSpeed);
+    }
+
+    private void LabExitEvent(){
+        WalkUp();
+        curtainScript.Close(0.01f);
+    }
+
+    private void EndGame(){
+        SceneManager.LoadScene(sceneNameOnEnd, LoadSceneMode.Single);
     }
 }

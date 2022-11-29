@@ -81,9 +81,7 @@ public class EnemyScript : MonoBehaviour
 
     private void DropTheItem(){
         var luck = UnityEngine.Random.value;
-        Debug.Log(luck);
         if(luck <= dropRate){
-            Debug.Log("Item");
             Instantiate(dropItem, transform.position, Quaternion.identity);
         }
     }

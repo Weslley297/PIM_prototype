@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     private PlayerMovementScript playerMovement;
     private PlayerAttackScript playerAttack;
     private PlayerAudioScript playerAudio;
+    private bool initialized;
     private float timer = 0;
     private bool invulnerable;
     private bool dead;
@@ -26,12 +27,22 @@ public class PlayerScript : MonoBehaviour
         playerMovement = GetComponent<PlayerMovementScript>();
         playerAttack = GetComponent<PlayerAttackScript>();
         playerAudio = GetComponent<PlayerAudioScript>();
+
+        playerInput.InputDisableByTime(3);
+        playerMovement.StopByTime(3);
+        timer = -3;
     }
 
     void Update()
     {
         if(timer < 0){
             timer += Time.deltaTime;
+        }
+
+        if(timer >= 0 && !initialized){
+            initialized = true;
+            playerAnimator.SetBool("GetUp", true);
+            playerMovement.SetMovement(new Vector2(0, 0.01f));
         }
 
         if(timer < 0 && invulnerable){
