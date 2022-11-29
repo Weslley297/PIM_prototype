@@ -19,7 +19,7 @@ public class EnemyControllerScript : MonoBehaviour
         CreateBabyAranhaOn(new Vector2(13f, 86f));
         CreateBabyAranhaOn(new Vector2(17f, 79f));
 
-        CreateAranhaOn(new Vector2(74f, 47f));
+        CreateAranhaOn(new Vector2(74.5f, 46f));
     
         CreateBabyAranhaOn(new Vector2(17f, 55f));
         CreateBabyAranhaOn(new Vector2(20f, 48f));

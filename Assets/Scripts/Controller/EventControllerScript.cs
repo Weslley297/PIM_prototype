@@ -118,6 +118,7 @@ public class EventControllerScript : MonoBehaviour
     }
 
     private void EndGame(){
+        soundController.StopMusic();
         SceneManager.LoadScene(sceneNameOnEnd, LoadSceneMode.Single);
     }
 }

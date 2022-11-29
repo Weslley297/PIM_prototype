@@ -287,6 +287,8 @@ PlayableDirector:
     value: {fileID: 2139622354}
   - key: {fileID: -6503989184255640193, guid: d7196d74d1471d34e9b15a7f8e7e9ea0, type: 2}
     value: {fileID: 1648024206}
+  - key: {fileID: 1929544090694011091, guid: d7196d74d1471d34e9b15a7f8e7e9ea0, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &28925438
@@ -2059,7 +2061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Wesley Pereira\n\nDiretor Tecnico, Programador, \nDesigner de Efeitos
+  m_text: "Weslley Pereira\n\nDiretor Tecnico, Programador, \nDesigner de Efeitos
     Visuais & Produtor"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7d9d772b34a6a2498ad0d45aa1ca87e, type: 2}
