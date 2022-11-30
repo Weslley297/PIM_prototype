@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     private PlayerMovementScript playerMovement;
     private PlayerAttackScript playerAttack;
     private PlayerAudioScript playerAudio;
+    private EventControllerScript eventControllerScript;
     private bool initialized;
     private float timer = 0;
     private bool invulnerable;
@@ -27,6 +28,7 @@ public class PlayerScript : MonoBehaviour
         playerMovement = GetComponent<PlayerMovementScript>();
         playerAttack = GetComponent<PlayerAttackScript>();
         playerAudio = GetComponent<PlayerAudioScript>();
+        eventControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<EventControllerScript>();
 
         playerInput.InputDisableByTime(3);
         playerMovement.StopByTime(3);
@@ -43,6 +45,7 @@ public class PlayerScript : MonoBehaviour
             initialized = true;
             playerAnimator.SetBool("GetUp", true);
             playerMovement.SetMovement(new Vector2(0, 0.01f));
+            eventControllerScript.EventEmit("GetUpEvent");
         }
 
         if(timer < 0 && invulnerable){
@@ -52,7 +55,11 @@ public class PlayerScript : MonoBehaviour
 
         if(invulnerable) {
             MakeVulnerable();
-        }      
+        } 
+
+        if(timer >= 0 && dead){
+            eventControllerScript.EventEmit("GameOverEvent");
+        }     
     }
 
     private void ToogleSpriteVisible(){
@@ -66,7 +73,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(float damage, Vector2 direction)
     {
-        if(invulnerable){
+        if(invulnerable || dead){
             return;
         }
 
@@ -95,6 +102,9 @@ public class PlayerScript : MonoBehaviour
         playerMovement.SetMoveSpeed(0);
         playerAudio.PlayDieSound();
         playerInput.InputDisable();
+
+        eventControllerScript.EventEmit("DeathEvent");
+
     }
 
     public void AddLife(float value){

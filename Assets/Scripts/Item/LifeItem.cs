@@ -9,13 +9,15 @@ public class LifeItem : MonoBehaviour
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
-    
+    private ItemControllerScript itemControllerScript;
     private bool colliding;
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+
+        itemControllerScript = GetComponent<ItemControllerScript>();
     }
     
     void OnTriggerEnter2D(Collider2D collider) {

@@ -12,6 +12,7 @@ TagManager:
   - PlayerLight
   - DinamicLight
   - Destructible
+  - Item
   layers:
   - Default
   - TransparentFX

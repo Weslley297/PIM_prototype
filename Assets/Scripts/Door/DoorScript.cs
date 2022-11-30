@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    public bool isSolar;
     private ItemControllerScript itemController;
+    private EventControllerScript eventController;
     private Collider2D doorCollider;
     private AudioSource audioSource;
     private Animator animator;
+    private bool firstTime = true;
     private float timer = 0;
     private bool locked = true;
     private bool open = false;
 
     void Start()
     {
-        itemController = GameObject.FindWithTag("GameController")
-            .GetComponent<ItemControllerScript>();
+        var gameController = GameObject.FindWithTag("GameController");
+        itemController = gameController.GetComponent<ItemControllerScript>();
+        eventController = gameController.GetComponent<EventControllerScript>();
             
         animator = GetComponent<Animator>();
         doorCollider = GetComponent<Collider2D>();
@@ -33,7 +37,16 @@ public class DoorScript : MonoBehaviour
     private void TryOpenDoor(){
         if(locked && itemController.UseTheKey(gameObject)){
             OpenDoor();
+            return;
         }
+
+        if(!firstTime){
+            return;
+        }
+
+        var eventName = isSolar ? "SolarDoorDialogEvent": "LockedDoorDialogEvent";
+        eventController.EventEmit(eventName);
+        firstTime = false;
     }
 
     public void OpenDoor(){

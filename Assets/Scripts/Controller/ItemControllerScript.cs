@@ -5,13 +5,15 @@ using UnityEngine;
 public class ItemControllerScript : MonoBehaviour
 {
     private List<KeyScript> keys;
+    private List<GameObject> CollectedItens;
 
     void Start()
     {
         keys = new List<KeyScript>();
     }
 
-    public void AddNewKey(GameObject key){
+    public void AddNewKey(GameObject key)
+    {
         keys.Add(key.GetComponent<KeyScript>());
     }
 

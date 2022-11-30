@@ -33,4 +33,13 @@ public class EnemyControllerScript : MonoBehaviour
         CreateBabyAranhaOn(new Vector2(-56f, 69f));
         CreateAranhaOn(new Vector2(-50f, 69));
     }
+
+    public void ClearEnemy(){
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+    }
 }

@@ -71,25 +71,47 @@ public class DialogControllerScript : MonoBehaviour
     }
 
     public void InitDestructibleRockDialog(){
-        dialog.Clear();
-
-        dialog.Add("Essa pedra está quebrando, um golpe forte deve destruí-la");
-
-        Active();
-        hasNPC = false;
-        dialogScript.SetPlaySound(false);
+        TipDialog("Essa pedra está quebrando, um golpe forte deve destruí-la.");
         DialogInteract();
     }
 
     public void InitDoorDialog(){
-        dialog.Clear();
+        TipDialog("Parece que a porta está emperrada, deve haver outra passagem.");
+        DialogInteract();
+    }
 
-        dialog.Add("Parece que a porta está emperrada, deve haver outra passagem");
+    public void InitGetUpDialog(){
+        TipDialog("Acho que não me viram, preciso sair daqui.");
+        DialogInteract();
+    }
+
+    public void InitLockedDoorDialog(){
+        TipDialog("Porta trancada, necessário cartão de acesso.");
+        DialogInteract();
+    }
+
+    public void InitSolarLockedDoorDialog(){
+        TipDialog("Esta porta deve abrir com alguma fonte de energia.");
+        DialogInteract();
+    }
+
+    public void InitBridgeOutDialog(){
+        TipDialog("Não consigo voltar por aqui, preciso achar outro caminho.");
+        DialogInteract();
+    }
+
+    public void InitLabAutoDestructionDialog(){
+        TipDialog("ATENÇÃO! ATENÇÃO! PROCESSO DE AUTO-DESTRUIÇÃO INICIADO, EVACUAR O LOCAL IMEDIATAMENTE!");
+        DialogInteract();
+    }
+
+    public void TipDialog(string text){
+        dialog.Clear();
+        dialog.Add(text);
 
         Active();
         hasNPC = false;
         dialogScript.SetPlaySound(false);
-        DialogInteract();
     }
 
     private void Active(){

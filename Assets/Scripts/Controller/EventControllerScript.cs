@@ -37,6 +37,9 @@ public class EventControllerScript : MonoBehaviour
         if(string.IsNullOrEmpty(name)){
             return;
         }
+        if(name.Equals("GetUpEvent")){
+            GetUpEvent();
+        }
         if(name.Equals("LabEnterEvent")){
             LabEnterEvent();
         }
@@ -51,6 +54,12 @@ public class EventControllerScript : MonoBehaviour
         }
         if(name.Equals("DoorDialogEvent")){
             DoorDialogEvent();
+        }
+        if(name.Equals("LockedDoorDialogEvent")){
+            LockedDoorDialogEvent();
+        }
+        if(name.Equals("SolarDoorDialogEvent")){
+            SolarDoorDialogEvent();
         }
         if(name.Equals("DestructibleRockDialogEvent")){
             DestructibleRockDialogEvent();
@@ -67,6 +76,19 @@ public class EventControllerScript : MonoBehaviour
         if(name.Equals("EndGameEvent")){
             EndGame();
         }
+
+        if(name.Equals("DeathEvent")){
+            Death();
+        }
+        if(name.Equals("GameOverEvent")){
+            GameOver();
+        }
+    }
+
+    private void GetUpEvent(){
+        playerInput.InputDisableByTime(1);
+        playerMovement.StopByTime(1);
+        dialogController.InitGetUpDialog();
     }
 
     private void LabEnterEvent(){
@@ -83,6 +105,10 @@ public class EventControllerScript : MonoBehaviour
         lightController.activeIntermittence();
         soundController.PlayBattleMusic();
         enemyController.CreateLabEnemies();   
+
+        playerInput.InputDisableByTime(2);
+        playerMovement.StopByTime(2);
+        dialogController.InitLabAutoDestructionDialog();
     }
 
     private void BridgeCrossEvent(){
@@ -91,6 +117,7 @@ public class EventControllerScript : MonoBehaviour
         GameObject.Find("EarthBridge").gameObject
             .GetComponent<TrapBridgeScript>()
             .Active();
+            
     }
 
     private void WalkUp(){
@@ -103,6 +130,10 @@ public class EventControllerScript : MonoBehaviour
     private void BridgeOutEvent(){
         playerInput.InputEnable();
         playerMovement.SetMoveSpeed(moveSpeed);
+
+        playerInput.InputDisableByTime(1);
+        playerMovement.StopByTime(1);
+        dialogController.InitBridgeOutDialog();
     }
 
     private void WalkToHologramEvent(){
@@ -141,6 +172,18 @@ public class EventControllerScript : MonoBehaviour
         dialogController.InitDestructibleRockDialog();
     }
 
+    private void LockedDoorDialogEvent(){
+        playerInput.InputDisableByTime(1);
+        playerMovement.StopByTime(1);
+        dialogController.InitLockedDoorDialog();
+    }
+
+    private void SolarDoorDialogEvent(){
+        playerInput.InputDisableByTime(1);
+        playerMovement.StopByTime(1);
+        dialogController.InitSolarLockedDoorDialog();
+    }
+
     private void LabExitEvent(){
         WalkUp();
         curtainScript.Close(0.01f);
@@ -149,5 +192,14 @@ public class EventControllerScript : MonoBehaviour
     private void EndGame(){
         soundController.StopMusic();
         SceneManager.LoadScene(sceneNameOnEnd, LoadSceneMode.Single);
+    }
+
+    private void Death(){
+        curtainScript.Close(0.005f);
+    }
+
+    private void GameOver(){
+        soundController.StopMusic();
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 }

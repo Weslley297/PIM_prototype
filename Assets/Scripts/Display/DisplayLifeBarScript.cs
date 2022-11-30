@@ -54,8 +54,8 @@ public class DisplayLifeBarScript : MonoBehaviour
 
         float line = (float)Math.Floor((Double)index / 4);
         float column = index - line * 4;
-        float x = -20 + column * 16; 
-        float y = 8 + line * -16; 
+        float x = -48 + column * 44; 
+        float y = 20 + line * -44; 
         Vector3 position = new Vector2(x, y);
         heartObj.GetComponent<RectTransform>().localPosition = position;
     }
