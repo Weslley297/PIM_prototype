@@ -52,7 +52,7 @@ public class PlayerInputScript : MonoBehaviour
     }
 
     public void DoAttack(){
-        if(playerAttack.NotHaveASword()){
+        if(playerAttack.NotHaveASword() || playerAttack.IsAttacking()){
             return;
         }
 

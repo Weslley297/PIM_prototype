@@ -6,7 +6,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     private GameObject sword;
     private Animator animator;
-    private float attackDelay = 0.6f;
+    private float attackDelay = 0.4f;
     private float timer = 0;
     private bool attacking;
 
@@ -77,5 +77,9 @@ public class PlayerAttackScript : MonoBehaviour
 
     public void SetSword(GameObject swordObj){
         swordPrefab = swordObj;
+    }
+
+    public bool IsAttacking(){
+        return attacking;
     }
 }

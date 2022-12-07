@@ -19,7 +19,7 @@ public class SwordScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         swordcollider.enabled = false;
-        timer = -0.6f;
+        timer = -0.4f;
     }
 
     void OnTriggerEnter2D(Collider2D otherCollider) 
@@ -48,7 +48,7 @@ public class SwordScript : MonoBehaviour
     void Update()
     {
         transform.position = swordUser.transform.position + position;
-        if(timer < -0.4){
+        if(timer < -0.2){
             timer += Time.deltaTime;
             return;
         }

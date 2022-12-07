@@ -11,8 +11,6 @@ public class CameraAudioScript : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    
-
     public void PlayExploreSound(){
         StopSound();
 
