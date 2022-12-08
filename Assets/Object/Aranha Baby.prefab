@@ -31,6 +31,14 @@ PrefabInstance:
       propertyPath: shooter
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7879209994198211817, guid: 787030192204d77408977d4a4ee4f243, type: 3}
+      propertyPath: dieParticle
+      value: 
+      objectReference: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+    - target: {fileID: 7879209994198211817, guid: 787030192204d77408977d4a4ee4f243, type: 3}
+      propertyPath: hitParticle
+      value: 
+      objectReference: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
     - target: {fileID: 7879209994198211818, guid: 787030192204d77408977d4a4ee4f243, type: 3}
       propertyPath: HP
       value: 25

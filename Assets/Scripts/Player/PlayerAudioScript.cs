@@ -7,6 +7,8 @@ public class PlayerAudioScript : MonoBehaviour
     public AudioClip attackSound;
     public AudioClip hitSound;
     public AudioClip dieSound;
+    public GameObject hitParticle;
+    
 
     private AudioSource audioSource;
 
@@ -46,6 +48,10 @@ public class PlayerAudioScript : MonoBehaviour
         audioSource.volume = 0.6f;
         audioSource.pitch = getPitch(0.8f, 1.4f);
         audioSource.Play();
+        if(hitParticle != null)
+        {
+            Instantiate(hitParticle, this.transform);
+        }
     }
 
     public void PlayDieSound(){

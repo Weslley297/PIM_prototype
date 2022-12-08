@@ -6,6 +6,8 @@ public class EnemyAudioScript : MonoBehaviour
     public AudioClip attackSound;
     public AudioClip hitSound;
     public AudioClip dieSound;
+    public GameObject hitParticle;
+    public GameObject dieParticle;
 
     private AudioSource audioSource;
 
@@ -47,6 +49,11 @@ public class EnemyAudioScript : MonoBehaviour
         audioSource.volume = 0.1f;
         audioSource.pitch = getPitch(0.8f, 1.4f);
         audioSource.Play();
+        if (hitParticle != null)
+        {
+            Instantiate(hitParticle, this.transform);
+        }
+        else return;
     }
 
     public void PlayDieSound(){
@@ -57,6 +64,11 @@ public class EnemyAudioScript : MonoBehaviour
         audioSource.volume = 0.5f;
         audioSource.pitch = getPitch(0.8f, 1.4f);
         audioSource.Play();
+        if (dieParticle != null)
+        {
+            Instantiate(dieParticle, this.transform);
+        }
+        else return;
     }
 
     public void StopSound(){

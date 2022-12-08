@@ -4,6 +4,7 @@ public class DestructibleScript : MonoBehaviour
 {
     public float HP;
     public float delay;
+    public GameObject destructionParticle;
 
     private SpriteRenderer sprite;
     private AudioSource audioSource;
@@ -26,6 +27,10 @@ public class DestructibleScript : MonoBehaviour
         }
 
         audioSource.Play();
+        if(destructionParticle != null)
+        {
+            Instantiate(destructionParticle, this.transform);
+        }
         colliding = true;
         Destruct();
     }

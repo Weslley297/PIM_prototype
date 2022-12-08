@@ -331,6 +331,8 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: 37596deb959264b42983a5853c9264f1, type: 3}
   hitSound: {fileID: 8300000, guid: 6ad3f8ce885614848a311d86079870f8, type: 3}
   dieSound: {fileID: 8300000, guid: 8737988162c2ed5459d0ea8f7378decf, type: 3}
+  hitParticle: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+  dieParticle: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
 --- !u!114 &7879209994198211822
 MonoBehaviour:
   m_ObjectHideFlags: 0

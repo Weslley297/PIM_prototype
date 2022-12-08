@@ -6,7 +6,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     private GameObject sword;
     private Animator animator;
-    private float attackDelay = 0.4f;
+    public float attackDelay = 0.4f;
     private float timer = 0;
     private bool attacking;
 

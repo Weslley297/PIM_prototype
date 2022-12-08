@@ -11,6 +11,7 @@ public class PlayerInputScript : MonoBehaviour
     private float inputVertical;
     private float timer;
     private bool inputDisabled;
+    private bool canAttack = true;
     void Start()
     {
         playerMovement = GetComponent<PlayerMovementScript>();
@@ -29,7 +30,7 @@ public class PlayerInputScript : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Attack")){
+        if (Input.GetButtonDown("Attack") & canAttack){
             DoAttack();        
             return;
         }
@@ -55,11 +56,12 @@ public class PlayerInputScript : MonoBehaviour
         if(playerAttack.NotHaveASword() || playerAttack.IsAttacking()){
             return;
         }
-
+        canAttack = false;
         playerAttack.SwordAttack();
         playerAudio.PlayAttackSound();
         timer = -playerAttack.GetAttackDelay();
-        playerMovement.StopByTime(timer);  
+        playerMovement.StopByTime(timer);
+        canAttack = true;
     }
 
     private void DoHorizontalMovement(float input){
